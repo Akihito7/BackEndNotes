@@ -1,0 +1,5 @@
+vc precisa definir no knex.file onde as migrations vao ser salvas depois disso no terminal do vs code vc deve usar o codigo npx knex migrate:make nomeDaTable;
+
+apos isso voce vai ter uma migration criada mas calma ela ainda nao foi executada ou seja a tabela nao foi criada é meio obvio uma vez que tu nao passou o nome da tabela e seus atributos mas relaxa isso é agora, voce devera ir no local que o arquivo da migration foi salvo e la vai ter dois metodos, duas funções uma chamada up e outra down a up é pra criar a tabela e a down para dropar
+
+voce devera na up passar a estrutura da tabela com comandos queryBuilder apos isso a tabela esta com a estrutura feita mas ainda nao está criada no banco de dados, vc precisa ir no terminal novamente e executar a migration para fazer isso basta usar o codigo npx knex migrate:latest apos fazer isso se a estrutura da tabela nao tiver nem um erro de sintaxe a sua tabela devera ser criada no banco de dados
