@@ -1,3 +1,0 @@
-O npm é um node pack manager ele vem quando voce instala a biblioteca node.js no seu projeto com ele voce pode instalar packs, bibliotecas do node e executar tambem os pacotes tambem mas um ponto que vale ressaltar é que voce so pode executar pacotes que estão instalados.
-
-ja o npx é executador de pacotes e ele vem junto com o npm quando instalado o node.js mas so apartir da versão 5.2.0, ele como dito acima serve para executar os pacotes de forma mais simples e uma vantagem dele é pode executar pacotes sem precisar instalar as vezes voce so quer testar um pacote, usar uma unica vez ou poucas vezes ai voce pode usar o npx para executar isso sem precisa gastar espaço em disco e deixar claramente o codigo mais clean.

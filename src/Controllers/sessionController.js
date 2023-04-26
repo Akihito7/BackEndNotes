@@ -10,6 +10,7 @@ const { sign } = require("jsonwebtoken");
 
 
 class sessionController{
+
     async create(request,response){
 
         const {email , password} = request.body;
@@ -24,16 +25,11 @@ class sessionController{
         }
 
         const passwordMatched = await compare(password, user.password);
-       
-        console.log(passwordMatched)
-        
 
         if(!passwordMatched){
 
-            console.log("a senha está inválida");
             throw new AppError("Email e/ou senha inválidas",401);
-            
-
+        
        }
 
         const { secret, expiresIn } = authConfig.jwt;
@@ -42,11 +38,9 @@ class sessionController{
             subject: String(user.id),
             expiresIn
         })
-        console.log("login feito com sucess")
 
         response.json({user,token});
-
-
+        
     }
 }
 

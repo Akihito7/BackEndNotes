@@ -1,4 +1,5 @@
 const {Router} = require("express");
+
 const ensureAuthenticated = require("../middlewares/ensureAuthenticated")
 
 const routes = Router();

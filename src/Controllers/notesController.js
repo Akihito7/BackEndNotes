@@ -1,11 +1,10 @@
 const knex = require("../database/knex");
 
 class notesController{
+
     async create(request,response){
 
         const {Title, Description ,links, tags } = request.body;
-
-       console.log(Title,Description)
 
         const user_id = request.user.id;
 
@@ -27,14 +26,11 @@ class notesController{
         }
     });
 
-        console.log(linkInsert)
-        console.log(typeof linkInsert)
-        
-
         await knex("links").insert(linkInsert);
 
         const tagsInserts = tags.map(name => {
             return{
+                
                 note_id,
                 name,
                 user_id
@@ -58,8 +54,6 @@ class notesController{
         const tags = await knex("tags").where({note_id: idNotes[0].id }).orderBy("name");
 
         const links = await knex("links").where({note_id: idNotes[0].id});
-
-        console.log("eu sou a resposta",{...notes,tags,links});
         
         return response.json({...notes,tags,links});
 
@@ -87,8 +81,6 @@ class notesController{
 
         const tagsFilter = tags.split(",").map(tag => tag.trim());
 
-        console.log("É O XAMA CARALHO");
-
         notes = await knex("tags").select([
             "notes.id",
             "notes.Title",
@@ -99,8 +91,6 @@ class notesController{
         .whereIn('name', tagsFilter)
         .groupBy('notes.Title')
         .orderBy('notes.Title');
-        
-        console.log("eu sou xamazao",notes)
        
     }
     else if(title !== undefined){
@@ -109,8 +99,6 @@ class notesController{
         .whereLike("Title", `%${title}%` );
     }
     
-        console.log("sou o notes pika",notes);
-
         const userTags = await knex("tags").where({user_id});
        
         const notesWithTags = notes.map(note => {
@@ -123,8 +111,6 @@ class notesController{
         }
        })
        
-        console.log("cheguei no step three")
-
         response.json(notesWithTags);
     }
 

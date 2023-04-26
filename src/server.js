@@ -1,4 +1,5 @@
 const migrations = require("./database/sqlite/migrations");
+
 require("dotenv/config")
 
 const cors = require("cors");
@@ -22,8 +23,6 @@ app.use('/files', express.static(uplodConfigs.UPLOADS_FOLDER));
 const appError = require("./utils/appError");
 
 const routes = require("./routes");
-
-const createUsers = require("./database/sqlite/migrations/createUsers");
 
 app.use(routes);
 
@@ -51,6 +50,7 @@ app.use((error, request, response, next) => {
 
 
 const PORT = process.env.PORT || 3333;
+
 app.listen(PORT,() => console.log(`server is running on port ${PORT}`));
 
 

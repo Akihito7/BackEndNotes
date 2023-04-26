@@ -34,44 +34,37 @@ class userController {
     const {name,email,password,old_password} = request.body;
 
     const user_id = request.user.id;
-    console.log(`o que ta chegando ${password}`,)
 
     const database = await sqliteConnection();
 
     const user = await database.get("SELECT * FROM users WHERE id = (?)", [user_id]);
 
       if(!user.id){
+
        throw new appError("User does not exist");
+
    }
 
     const checkEmailExists = await database.get("SELECT * FROM users WHERE email = ?",[email])
-    console.log("old password")
-    console.log(old_password)
-    console.log("new password")
-    console.log(password)
-
-
-
-
+   
     if(checkEmailExists && checkEmailExists.id !== user.id){
-      console.log(checkEmailExists.id)
-      console.log(user.id)
-      throw new appError("Existing email")
+
+      throw new appError("Existing email");
       
     }
     user.name = name ?? user.name;
     user.email = email ?? user.email;
 
     if(password && !old_password){
-      throw new appError("tell your old password before change to new password")
+      throw new appError("tell your old password before change to new password");
     }
 
     if(password && old_password){
+
       const checkPassword = await compare(old_password, user.password);
-      console.log("checando password")
-      console.log(checkEmailExists)
 
       if(!checkPassword){
+
         throw new appError("Senha antiga incorreta, por favor tente novamente");
 
       }
@@ -79,9 +72,6 @@ class userController {
 
     }
 
-
-  console.log(old_password);
-  console.log(user.password)
     await database.run(`UPDATE users SET
     name = ?,
     email = ?,

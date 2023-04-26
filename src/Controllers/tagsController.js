@@ -15,11 +15,7 @@ class tagsController {
 
         const user_id = request.user.id;
 
-        console.log(user_id)
-
         const data = await knex("tags").where({user_id}).groupBy('name')
-
-        console.log(data)
 
         return response.json(data);
         
